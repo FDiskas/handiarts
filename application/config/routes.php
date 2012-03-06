@@ -68,6 +68,8 @@ $route['default_controller'] = "main";
 $route['404_override'] = '';
 $route['login'] = 'main/login';
 $route['admin/logout'] = 'admin/login/logout';
+$route['admin/users/(:num)'] = 'admin/user/index/$1';
+$route['admin/users'] = 'admin/user/index';
 
 
 /* End of file routes.php */

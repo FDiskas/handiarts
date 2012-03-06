@@ -162,6 +162,10 @@ class User_model extends CI_Model
 		return $query->result_array();
 	}
 
+	public function totalUsers( $aOptions = array() ) {
+
+		return $this->db->count_all('users');
+	}
 
 	public function userLogin( $aOptions = array() ) {
 

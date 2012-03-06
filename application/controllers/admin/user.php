@@ -20,15 +20,28 @@ class User extends CI_Controller {
 	}
 
 
-	public function Index( $page = 0) {
+	public function Index( $page = 0 ) {
 
 		$aUser = $this->user_model->getUsers( array( 'iLimit' => 10, 'iOffset' => $page ) );
 		unset( $aUser['userPassword'] );
 
-		dbx( $aUser );
-		die();
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'admin/users/';
+		$config['total_rows'] = $this->user_model->totalUsers();
+		$config['per_page'] = 10;
+		$config['use_page_numbers'] = TRUE;
+		$config['full_tag_open'] = '<div class="pagination">';
+		$config['full_tag_close'] = '</div>';
+		$config['anchor_class'] = 'number';
+		$config['cur_tag_open'] = '<a href="#" class="number current">';
+		$config['cur_tag_close'] = '</a>';
+//		$config['num_tag_open'] = '';
 
-		$this->smarty->assign('tr', array('class="alt-row"','class=""'));
+		$this->pagination->initialize($config);
+
+		$sPages = $this->pagination->create_links();
+
+		$this->smarty->assign('sPages', $sPages );
 		$this->smarty->assign('aUsers', array_values( $aUser ) );
 
 		$this->smarty->view('admin/user.tpl' );

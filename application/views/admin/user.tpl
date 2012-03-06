@@ -13,6 +13,14 @@
 			<th>{t}Type{/t}</th>
 		</tr>
 		</thead>
+		<tfoot>
+		<tr>
+			<td colspan="4">
+				{$sPages}
+				<div class="clear"></div>
+			</td>
+		</tr>
+		</tfoot>
 		<tbody>
 		{foreach from=$aUsers item='aUser' name='userTable'}
 		<tr class="{if $smarty.foreach.userTable.index is even}alt-row{/if}">

@@ -68,6 +68,19 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES (1,'test@test.com','098f6bcd4621d373cade4e832627b4f6','active','admin');
+
+INSERT INTO `handiart`.`users`
+SELECT NULL, concat(substring(MD5(RAND()), -8) , '@test.com '), `userPassword`, `userStatus` , `userType` FROM `users`
+
+INSERT INTO `handiart`.`users`
+SELECT NULL, concat(substring(MD5(RAND()), -8) , '@test.com '), `userPassword`, `userStatus` , `userType` FROM `users`
+
+INSERT INTO `handiart`.`users`
+SELECT NULL, concat(substring(MD5(RAND()), -8) , '@test.com '), `userPassword`, `userStatus` , `userType` FROM `users`
+
+INSERT INTO `handiart`.`users`
+SELECT NULL, concat(substring(MD5(RAND()), -8) , '@test.com '), `userPassword`, `userStatus` , `userType` FROM `users`
+
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
