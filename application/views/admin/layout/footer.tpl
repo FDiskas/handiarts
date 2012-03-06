@@ -1,0 +1,1 @@
+{extends file='admin/layout/layout.tpl'}

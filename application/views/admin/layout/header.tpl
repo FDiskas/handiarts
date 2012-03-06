@@ -1,5 +1,5 @@
 {extends file='admin/layout/layout.tpl'}
-{block name=head}
+{block name='head'}
 	<link rel="stylesheet" href="{$base_url}resources/admin/css/reset.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="{$base_url}resources/admin/css/style.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="{$base_url}resources/admin/css/invalid.css" type="text/css" media="screen"/>

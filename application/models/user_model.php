@@ -8,6 +8,7 @@
  *
  * @package Users
  * @property CI_Session $session
+ * @property CI_DB $db
  */
 class User_model extends CI_Model
 {
@@ -155,10 +156,10 @@ class User_model extends CI_Model
 		$query = $this->db->get('users');
 
 		if ( isset( $aOptions['userId']) || isset( $aOptions['userEmail'] ) ) {
-			return $query->row(0);
+			return $query->row_array();
 		}
 
-		return $query->result();
+		return $query->result_array();
 	}
 
 

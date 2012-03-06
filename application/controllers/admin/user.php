@@ -13,7 +13,6 @@ class User extends CI_Controller {
 		parent::__construct();
 
 		if ( !$this->user_model->isAdmin() ) {
-			$this->lang->load('messages');
 
 			$this->session->set_flashdata('errorMessage', $this->lang->line('access denied'));
 			redirect( 'admin/login' );
@@ -21,10 +20,18 @@ class User extends CI_Controller {
 	}
 
 
-	public function Index() {
+	public function Index( $page = 0) {
 
-		echo ', NOT :D';
+		$aUser = $this->user_model->getUsers( array( 'iLimit' => 10, 'iOffset' => $page ) );
+		unset( $aUser['userPassword'] );
+
+		dbx( $aUser );
 		die();
+
+		$this->smarty->assign('tr', array('class="alt-row"','class=""'));
+		$this->smarty->assign('aUsers', array_values( $aUser ) );
+
+		$this->smarty->view('admin/user.tpl' );
 	}
 
 	public function Edit( $iID = 0 ) {
@@ -35,13 +42,12 @@ class User extends CI_Controller {
 		} else {
 			// Try to get info from DB
 
-			$what = $this->user_model->getUsers( array( 'userId' => $iID ) );
-				//echo $what->userEmail;
-			dbx( $what );
-			//$this->smarty->assign()
-			$item['url'] = 'labas';
-			$item['title'] = 'Laba diena';
-			$this->smarty->view('admin/user.tpl', array('item' => $item ) );
+			$aUser[] = $this->user_model->getUsers( array( 'userId' => $iID ) );
+
+			unset( $aUser['userPassword'] );
+
+			$this->smarty->assign('aUsers', $aUser);
+			$this->smarty->view('admin/user.tpl' );
 		}
 	}
 }
