@@ -156,10 +156,10 @@ class User_model extends CI_Model
 		$query = $this->db->get('users');
 
 		if ( isset( $aOptions['userId']) || isset( $aOptions['userEmail'] ) ) {
-			return $query->row_array();
+			return $query->row(0);
 		}
 
-		return $query->result_array();
+		return $query->result();
 	}
 
 	public function totalUsers( $aOptions = array() ) {

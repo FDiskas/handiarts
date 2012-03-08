@@ -22,7 +22,13 @@ class User extends CI_Controller {
 
 	public function Index( $page = 0 ) {
 
-		$aUser = $this->user_model->getUsers( array( 'iLimit' => 10, 'iOffset' => $page ) );
+		if ( $this->input->get('search')) {
+
+			$aUser = $this->user_model->getUsers( array( 'userEmail' => $this->input->get('search'), 'iLimit' => 10, 'iOffset' => $page ) );
+		} else {
+
+			$aUser = $this->user_model->getUsers( array( 'iLimit' => 10, 'iOffset' => $page ) );
+		}
 		unset( $aUser['userPassword'] );
 
 		$this->load->library('pagination');
@@ -42,7 +48,7 @@ class User extends CI_Controller {
 		$sPages = $this->pagination->create_links();
 
 		$this->smarty->assign('sPages', $sPages );
-		$this->smarty->assign('aUsers', array_values( $aUser ) );
+		$this->smarty->assign('aUsers', $aUser );
 
 		$this->smarty->view('admin/user.tpl' );
 	}
